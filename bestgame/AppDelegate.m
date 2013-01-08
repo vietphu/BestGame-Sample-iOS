@@ -169,7 +169,8 @@ NSString * const kPropellerURL = @"https://staging.grantoo.com/sdk";
 	// set the Navigation Controller as the root view controller
 	[window_ setRootViewController:navController_];
 
-    [[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
+    // Uncomment to enable GameCenter.
+    //[[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
     [self initGSDK]; // This must be called before makeKeyAndVisible.
 
 // Uncomment if you want to user UserVoice

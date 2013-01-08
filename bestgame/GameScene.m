@@ -218,7 +218,8 @@
     
     // add to History
     [[GameHistory instance] updateHistoryWithScore:score taps:presses];
-    [[GameKitHelper sharedGameKitHelper] submitScore:score category:kGameKitCategory];
+    // Uncomment to enable GameCenter.
+    //[[GameKitHelper sharedGameKitHelper] submitScore:score category:kGameKitCategory];
     
 }
 

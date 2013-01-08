@@ -58,7 +58,8 @@
 {
     // Uncomment for Flurry
     //[Flurry logEvent:@"GameCenterSelected"];
-    [[GameKitHelper sharedGameKitHelper] showLeaderBoard];
+    // Uncomment to enable GameCenter.
+    //[[GameKitHelper sharedGameKitHelper] showLeaderBoard];
 }
 
 @end
