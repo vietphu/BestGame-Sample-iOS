@@ -10,8 +10,8 @@ connect with one another, create challenges and join tournaments.
 
  
 
-![](https://raw.github.com/patchin/images/master/image002.png)
-![](https://raw.github.com/patchin/images/master/image004.png)
+![](https://raw.github.com/Grantoo/BestGame-Sample-iOS/master/readme_image_files/image002.png)
+![](https://raw.github.com/Grantoo/BestGame-Sample-iOS/master/readme_image_files/image004.png)
   
 
 
