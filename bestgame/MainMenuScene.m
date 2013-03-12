@@ -9,7 +9,6 @@
 #import "GamePayload.h"
 #import "AppDelegate.h"
 #import "GameHistory.h"
-#import "ChallengeCountNotifier.h"
 #import "SimpleAudioEngine.h"
 //#import "Flurry.h"
 
@@ -19,9 +18,6 @@
     CCMenuItemImage    *soundOffButton;
 }
 - (BOOL)sendResult;
-- (void)startNotification;
-- (void)stopNotification;
-- (void)receiveChallengeCountNotification:(NSNotification *)notification;
 - (void)setSoundButtons;
 @end
 
@@ -30,6 +26,10 @@
 - (id)init {
 	if (self = [super init]) {
         CCLOG(@"MainMenuScene::alloc");
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(receiveChallengeCount:)
+                                                     name:@"PropellerSDKChallengeCountChanged"
+                                                   object:nil];
 	}
 	return self;
 }
@@ -41,7 +41,6 @@
 
 - (void)onExit {
     CCLOG(@"MainMenuScene::onExit");
-    [self stopNotification];
     [[NSNotificationCenter defaultCenter] removeObserver:self];//important!!!
     [super onExit];
 }
@@ -62,14 +61,13 @@
         
         [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
         [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"menuBGM.mp3" loop:NO];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(receiveChallengeCountNotification:)
-                                                     name:CHALLENGE_COUNT_NOTIFICATION
-                                                   object:nil];
         
-        CCLOG(@"onEnter: calling startNotification.");
-        [self startNotification];
+        int currCount = [[PropellerSDK instance] getChallengeCounts];
+        [self displayChallengeCount:currCount];
+        
+        [self updateChallengeCount:0];
     }
+    [self schedule:@selector(updateChallengeCount:) interval:15];
 }
 
 - (void) goPlay:(id)sender
@@ -85,7 +83,6 @@
 - (void) goLaunch:(id)sender
 {
     CCLOG(@"goLaunch calling stopNotification");
-    [self stopNotification];
     // Uncomment for Flurry
     //[Flurry logEvent:@"SDKLaunch"];
     [self stopCocos];
@@ -116,6 +113,28 @@
 
 #pragma mark -
 #pragma mark Private methods
+
+- (void)receiveChallengeCount:(NSNotification *) notification
+{
+    if ([[notification name] isEqualToString:@"PropellerSDKChallengeCountChanged"]) {
+        NSDictionary *userInfo = notification.userInfo;
+        int count = [[userInfo objectForKey:@"count"] integerValue];
+        [self displayChallengeCount:count];
+    }
+}
+
+- (void)updateChallengeCount:(float) dt {
+    [[PropellerSDK instance] syncChallengeCounts];
+}
+
+- (void)displayChallengeCount:(int) challengeCount {
+    if (challengeCount > 0) {
+        [challengeLabel.parent setVisible:YES];
+        [challengeLabel setString:[NSString stringWithFormat:@"%d", challengeCount]];
+    } else {
+        [challengeLabel.parent setVisible:NO];
+    }
+}
 
 - (void)stopCocos
 {
@@ -169,8 +188,6 @@
     // just a regular exit ... go along with your business
     [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
     [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"menuBGM.mp3" loop:NO];
-    CCLOG(@"sdkCompletedWithExit calling startNotification");
-    [self startNotification];
 }
 
 - (void)sdkCompletedWithMatch:(NSDictionary *)match {
@@ -193,52 +210,12 @@
         
         [self goPlay:nil];
     }
-    else {
-        [self startNotification];
-    }
 }
 
 - (void)sdkFailed:(NSDictionary *)result {
     // Uncomment for Flurry
     //[Flurry logEvent:@"SDKCompletedWithFail"];
     [self startCocos];
-    CCLOG(@"sdkFailed calling startNotification");
-    [self startNotification];
-}
-
-#pragma mark -
-#pragma mark Notifier Methods
-
-- (void)startNotification {
-    // Update the userDetails status and the playerId used
-    // by the notifier object.
-    NSDictionary *userDetails = [[PropellerSDK instance] getUserDetails];
-    NSString *playerId = [userDetails objectForKey:@"userID"];
-    NSString *playerToken = [userDetails objectForKey:@"userToken"];
-    [challengeLabel.parent setVisible:false];
-    if (playerId) {
-        [[ChallengeCountNotifier instance] start:playerId token:playerToken];
-    }
-}
-
-- (void)stopNotification {
-    [[ChallengeCountNotifier instance] stop];
-}
-
-- (void)receiveChallengeCountNotification:(NSNotification *)notification {
-    
-    if ([[notification name] isEqualToString:CHALLENGE_COUNT_NOTIFICATION]) {
-        CCLOG (@"Successfully received the %@ notification!", CHALLENGE_COUNT_NOTIFICATION);
-        
-        int challengeCount = [(ChallengeCountNotifier *)[notification object] count];
-        
-        if (challengeCount > 0) {
-            [challengeLabel.parent setVisible:true];
-            [challengeLabel setString:[NSString stringWithFormat:@"%i", challengeCount]];
-        } else {
-            [challengeLabel.parent setVisible:false];
-        }
-    }
 }
 
 #pragma mark -

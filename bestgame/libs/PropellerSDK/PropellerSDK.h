@@ -2,7 +2,7 @@
 //  PropellerSDK.h
 //  libPropellerSDK
 //
-//  Copyright (c) 2013 Grantoo. All rights reserved.
+//  Copyright (c) 2012 Grantoo. All rights reserved.
 //
 // PropellerSDK is implemented as a singleton that is accessible
 // via an static instance factory method. One may use this class
@@ -16,6 +16,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 typedef enum {
     kPropelSDKPortrait,
@@ -43,8 +44,23 @@ typedef enum {
 @interface PropellerSDK : NSObject
 // Used to initialize the singleton instance with some
 // kind of parameters.
-+ (void)initializeWithGameID:(NSString *)gameID gameSecret:(NSString *)gameSecret gameOrientation:(PropelSDKGameOrientation)orientation;
-+ (void)initializeWithGameID:(NSString *)gameID gameSecret:(NSString *)gameSecret gameOrientation:(PropelSDKGameOrientation)orientation sdkURL:(NSString *)sdkURL;
++ (void)setRootViewController:(UIViewController *)rootViewController;
++ (void)useTestServers;
++ (void)useDebugServers:(NSString *)sdkURL grantooAPIURL:(NSString *)grantooAPIURL tournamentAPIURL:(NSString *)tournamentAPIURL challengeAPIURL:(NSString *)challengeAPIURL;
++ (void)initialize:(NSString *)gameID gameSecret:(NSString *)gameSecret;
++ (void)setNotificationToken:(NSString *)token;
+// Handle incoming push notification.
+// bNewLaunch = YES if the push notification caused the app to launch
+// bNewLaunch = NO if the push notification came in while the app is already active
+// Returns YES if the notification was handled, NO otherwise.
++ (BOOL)handleRemoteNotification:(NSDictionary *)userInfo newLaunch:(BOOL)bNewLaunch;
+
+// Returns YES if a Grantoo push notification came in and was stored by the SDK for the next launch of the SDK
+// Returns NO if no push notification came in since the last time the SDK was launched
++ (BOOL)hasPendingRemoteNotification;
+
+// setup functions that can be called on the created instance
+- (void)setOrientation:(PropelSDKGameOrientation)orientation;
 
 // Returns an instance of this class as a Singleton
 + (PropellerSDK *)instance;
@@ -57,6 +73,9 @@ typedef enum {
 - (BOOL)launchWithTournament:(NSString *)tournamentID delegate:(id<PropellerSDKDelegate>)delegate;
 - (BOOL)launchWithMatchResult:(NSDictionary *)matchResult delegate:(id<PropellerSDKDelegate>)delegate;
 
-- (NSDictionary *)getUserDetails;
+// Retrieves and returns the challenge counts for the current user
+- (void)syncChallengeCounts;
+- (int)getChallengeCounts;
 
+- (NSDictionary *)getUserDetails;
 @end

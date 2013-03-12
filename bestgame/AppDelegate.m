@@ -9,8 +9,6 @@
 #import "AppDelegate.h"
 #import "IntroLayer.h"
 #import "PropellerSDK.h"
-#import "GrantooAPI.h"
-#import "ChallengeCountNotifier.h"
 #import "CCBReader.h"
 #import "GameKitHelper.h"
 // Uncomment for Flurry
@@ -31,7 +29,7 @@
 
 NSString * const kPropellerGameID = @"50cfb283bbb6a4020000000d";
 NSString * const kPropellerGameSecret = @"605bd189-8393-9d8e-0bab-6691cf458c8d";
-NSString * const kPropellerURL = @"https://staging.grantoo.com/sdk";
+NSString * const kPropellerURL = @"https://sandbox.grantoo.com/sdk";
 
 @implementation MyNavigationController
 
@@ -83,6 +81,24 @@ NSString * const kPropellerURL = @"https://staging.grantoo.com/sdk";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     CCLOG(@"application:didFinishLaunchingWithOptions:");
+    
+    // Check if the app has been launched due to an incoming push notification.
+    NSDictionary *remoteNotificationDict = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (remoteNotificationDict) {
+        if (![PropellerSDK handleRemoteNotification:remoteNotificationDict newLaunch:YES]) {
+            // This is not a Grantoo notification, I should
+            //  handle it.
+        }
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Notification Alert" message:@"Launched by a push notification!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+
+    [[UIApplication sharedApplication]
+     registerForRemoteNotificationTypes:
+     (UIRemoteNotificationTypeAlert |
+      UIRemoteNotificationTypeBadge |
+      UIRemoteNotificationTypeSound)];
     
     // Create the main window
 	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -171,7 +187,7 @@ NSString * const kPropellerURL = @"https://staging.grantoo.com/sdk";
 
     // Uncomment to enable GameCenter.
     //[[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
-    [self initGSDK]; // This must be called before makeKeyAndVisible.
+    [self initGSDK:navController_]; // This must be called before makeKeyAndVisible.
 
 // Uncomment if you want to user UserVoice
 //    self.uvConfig = [UVConfig configWithSite:kUserVoiceSite
@@ -184,10 +200,42 @@ NSString * const kPropellerURL = @"https://staging.grantoo.com/sdk";
 	return YES;
 }
 
-- (void)initGSDK {
-    [PropellerSDK initializeWithGameID:kPropellerGameID gameSecret:kPropellerGameSecret gameOrientation:kPropelSDKLandscape sdkURL:kPropellerURL];
-    [GrantooAPI initWithGrantooURL:kGrantooURL tournamentURL:kTournamentURL challengeURL:kChallengeURL gameID:kPropellerGameID gameSecret:kPropellerGameSecret];
-    [ChallengeCountNotifier init];
+// Handle push notification coming in while the app is active or running in the background.
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    if (![PropellerSDK handleRemoteNotification:userInfo newLaunch:NO]) {
+        // This is not a Grantoo notification, I should
+        // handle it.
+    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Notification Alert" message:@"Got a push notification!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+}
+
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken
+{
+    NSLog(@"application:didRegisterForRemoteNotificationWithDeviceToken:");
+    
+    NSString *deviceToken = [[devToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    deviceToken = [deviceToken stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    NSLog(@"deviceToken = %@", deviceToken);
+    
+    [PropellerSDK setNotificationToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err
+{
+    NSString *str = [NSString stringWithFormat: @"Error: %@", err];
+    NSLog(@"%@",str);
+    [PropellerSDK setNotificationToken:nil];
+}
+
+- (void)initGSDK:(UIViewController *)rootController
+{
+    [PropellerSDK useTestServers];
+    [PropellerSDK setRootViewController:rootController];
+    [PropellerSDK initialize:kPropellerGameID gameSecret:kPropellerGameSecret];
+    [[PropellerSDK instance] setOrientation:kPropelSDKLandscape];
 }
 
 // getting a call, pause the game

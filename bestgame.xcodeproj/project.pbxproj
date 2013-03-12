@@ -276,6 +276,7 @@
 		0CE763BC1676C77200EBE18E /* outgameBGM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0CE763B91676C77200EBE18E /* outgameBGM.mp3 */; };
 		0CE763BE1676C77200EBE18E /* scoreSFX.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0CE763BB1676C77200EBE18E /* scoreSFX.wav */; };
 		0CE763C01676CC8A00EBE18E /* lockSFX.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0CE763BF1676CC8A00EBE18E /* lockSFX.wav */; };
+		EF2F8F5F16DEA2DC008215AE /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2F8F5E16DEA2DC008215AE /* AdSupport.framework */; };
 		EF3C975E166967C8000AE1E4 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = EF3C975A166967C8000AE1E4 /* Icon-Small-50.png */; };
 		EF3C975F166967C8000AE1E4 /* Icon-Small-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF3C975B166967C8000AE1E4 /* Icon-Small-50@2x.png */; };
 		EF3C9760166967C8000AE1E4 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = EF3C975C166967C8000AE1E4 /* Icon-Small.png */; };
@@ -287,14 +288,11 @@
 		EF3C976C16696876000AE1E4 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = EF3C976A16696875000AE1E4 /* iTunesArtwork */; };
 		EF3C976D16696876000AE1E4 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = EF3C976B16696876000AE1E4 /* iTunesArtwork@2x */; };
 		EF3C9771166968A9000AE1E4 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EF3C976E166968A8000AE1E4 /* Default-Landscape@2x~ipad.png */; };
-		EFB2B6DE1654105200B980C3 /* ChallengeCountNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = EFB2B6DD1654105200B980C3 /* ChallengeCountNotifier.m */; };
 		EFEC45DE16978B5600B30079 /* libPropellerSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFEC45A916978B5600B30079 /* libPropellerSDK.a */; };
 		EFEC45DF16978B5600B30079 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFEC45AC16978B5600B30079 /* libTestFlight.a */; };
-		EFEC45E016978B5600B30079 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = EFEC45AD16978B5600B30079 /* README.md */; };
 		EFEC45E116978B5600B30079 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = EFEC45AE16978B5600B30079 /* release_notes.md */; };
 		EFEC45E216978B5600B30079 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = EFEC45B116978B5600B30079 /* CHANGELOG.md */; };
 		EFEC45E316978B5600B30079 /* libUserVoice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFEC45B216978B5600B30079 /* libUserVoice.a */; };
-		EFEC45E416978B5600B30079 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = EFEC45B316978B5600B30079 /* README.md */; };
 		EFEC45E516978B5600B30079 /* UserVoice.strings in Resources */ = {isa = PBXBuildFile; fileRef = EFEC45BA16978B5600B30079 /* UserVoice.strings */; };
 		EFEC45E616978B5600B30079 /* uv_article.png in Resources */ = {isa = PBXBuildFile; fileRef = EFEC45BF16978B5600B30079 /* uv_article.png */; };
 		EFEC45E716978B5600B30079 /* uv_article@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EFEC45C016978B5600B30079 /* uv_article@2x.png */; };
@@ -327,7 +325,6 @@
 		EFEC460216978B5600B30079 /* uv_vote_chicklet_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = EFEC45DB16978B5600B30079 /* uv_vote_chicklet_empty.png */; };
 		EFEC460316978B5600B30079 /* uv_vote_chicklet_empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EFEC45DC16978B5600B30079 /* uv_vote_chicklet_empty@2x.png */; };
 		EFEC460916978B6500B30079 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFEC460716978B6500B30079 /* libFlurry.a */; };
-		EFF8E7D31656E7D700866A4A /* GrantooAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF8E7D21656E7D700866A4A /* GrantooAPI.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -751,6 +748,7 @@
 		0CE763B91676C77200EBE18E /* outgameBGM.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = outgameBGM.mp3; sourceTree = "<group>"; };
 		0CE763BB1676C77200EBE18E /* scoreSFX.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = scoreSFX.wav; sourceTree = "<group>"; };
 		0CE763BF1676CC8A00EBE18E /* lockSFX.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lockSFX.wav; sourceTree = "<group>"; };
+		EF2F8F5E16DEA2DC008215AE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		EF3C975A166967C8000AE1E4 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-50.png"; path = "Resources/Icon-Small-50.png"; sourceTree = "<group>"; };
 		EF3C975B166967C8000AE1E4 /* Icon-Small-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-50@2x.png"; path = "Resources/Icon-Small-50@2x.png"; sourceTree = "<group>"; };
 		EF3C975C166967C8000AE1E4 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small.png"; path = "Resources/Icon-Small.png"; sourceTree = "<group>"; };
@@ -762,8 +760,6 @@
 		EF3C976A16696875000AE1E4 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = Resources/iTunesArtwork; sourceTree = "<group>"; };
 		EF3C976B16696876000AE1E4 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; name = "iTunesArtwork@2x"; path = "Resources/iTunesArtwork@2x"; sourceTree = "<group>"; };
 		EF3C976E166968A8000AE1E4 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape@2x~ipad.png"; path = "Resources/Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
-		EFB2B6DC1654105200B980C3 /* ChallengeCountNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChallengeCountNotifier.h; sourceTree = "<group>"; };
-		EFB2B6DD1654105200B980C3 /* ChallengeCountNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChallengeCountNotifier.m; sourceTree = "<group>"; };
 		EFEC45A916978B5600B30079 /* libPropellerSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPropellerSDK.a; sourceTree = "<group>"; };
 		EFEC45AA16978B5600B30079 /* PropellerSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropellerSDK.h; sourceTree = "<group>"; };
 		EFEC45AC16978B5600B30079 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
@@ -814,8 +810,6 @@
 		EFEC45DD16978B5600B30079 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/UserVoice.strings"; sourceTree = "<group>"; };
 		EFEC460616978B6500B30079 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		EFEC460716978B6500B30079 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
-		EFF8E7D11656E7D700866A4A /* GrantooAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrantooAPI.h; sourceTree = "<group>"; };
-		EFF8E7D21656E7D700866A4A /* GrantooAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrantooAPI.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -823,6 +817,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF2F8F5F16DEA2DC008215AE /* AdSupport.framework in Frameworks */,
 				0C0661041639AC0200A60305 /* QuartzCore.framework in Frameworks */,
 				0CC40860166FDE510009C618 /* SystemConfiguration.framework in Frameworks */,
 				0C0661061639AC0200A60305 /* OpenGLES.framework in Frameworks */,
@@ -873,6 +868,7 @@
 				0C06610F1639AC0200A60305 /* Foundation.framework */,
 				0C0661111639AC0200A60305 /* CoreGraphics.framework */,
 				0C0661131639AC0200A60305 /* GameKit.framework */,
+				EF2F8F5E16DEA2DC008215AE /* AdSupport.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -898,7 +894,6 @@
 				0C63398E165F52B200EE18C6 /* StatsScene.m */,
 				0CA7421916717BCF005D81C2 /* RulesScene.h */,
 				0CA7421A16717BD0005D81C2 /* RulesScene.m */,
-				EFF8E7D01656E7C100866A4A /* Network */,
 				0C32B72A16711F40008A7A6B /* libs */,
 				0C0661161639AC0200A60305 /* Resources */,
 				0C0662981639AC0500A60305 /* Supporting Files */,
@@ -1543,17 +1538,6 @@
 			path = Flurry;
 			sourceTree = "<group>";
 		};
-		EFF8E7D01656E7C100866A4A /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				EFB2B6DC1654105200B980C3 /* ChallengeCountNotifier.h */,
-				EFB2B6DD1654105200B980C3 /* ChallengeCountNotifier.m */,
-				EFF8E7D11656E7D700866A4A /* GrantooAPI.h */,
-				EFF8E7D21656E7D700866A4A /* GrantooAPI.m */,
-			);
-			name = Network;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1580,7 +1564,7 @@
 		0C0660F61639AC0200A60305 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = Developer;
 			};
 			buildConfigurationList = 0C0660F91639AC0200A60305 /* Build configuration list for PBXProject "bestgame" */;
@@ -1758,10 +1742,8 @@
 				0CE763BC1676C77200EBE18E /* outgameBGM.mp3 in Resources */,
 				0CE763BE1676C77200EBE18E /* scoreSFX.wav in Resources */,
 				0CE763C01676CC8A00EBE18E /* lockSFX.wav in Resources */,
-				EFEC45E016978B5600B30079 /* README.md in Resources */,
 				EFEC45E116978B5600B30079 /* release_notes.md in Resources */,
 				EFEC45E216978B5600B30079 /* CHANGELOG.md in Resources */,
-				EFEC45E416978B5600B30079 /* README.md in Resources */,
 				EFEC45E516978B5600B30079 /* UserVoice.strings in Resources */,
 				EFEC45E616978B5600B30079 /* uv_article.png in Resources */,
 				EFEC45E716978B5600B30079 /* uv_article@2x.png in Resources */,
@@ -1810,8 +1792,6 @@
 				0C06635C1639C31600A60305 /* GameScene.m in Sources */,
 				0CA3685C1642FD0D0072D19E /* GamePayload.m in Sources */,
 				0CA28EC01653349800AF64D7 /* GameHistory.m in Sources */,
-				EFB2B6DE1654105200B980C3 /* ChallengeCountNotifier.m in Sources */,
-				EFF8E7D31656E7D700866A4A /* GrantooAPI.m in Sources */,
 				0C63398F165F52B200EE18C6 /* StatsScene.m in Sources */,
 				0CDDB85F166C1985002DFCD7 /* GameKitHelper.m in Sources */,
 				0C32B83716711F41008A7A6B /* CCAction.m in Sources */,
@@ -1951,6 +1931,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1961,6 +1945,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
@@ -1972,6 +1957,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1980,6 +1969,7 @@
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
@@ -1992,6 +1982,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2019,6 +2010,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
