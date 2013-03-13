@@ -116,7 +116,7 @@ matchID) at a later time.
 After completing the match the SDK should be re-launched with score and
 a **launchWithMatchResult:delegate:** call:
 
-    - (void)sendResult:(int)score    {        NSDictionary *matchResult =             [[NSDictionary alloc] initWithObjectsAndKeys:            tournID, SDK_MATCH_POST_TOURNAMENT_KEY,            matchID,PSDK_MATCH_POST_MATCH_KEY,            [NSNumber numberWithInt:score],PSDK_MATCH_POST_SCORE_KEY,            nil]; 
+    - (void)sendResult:(int)score    {        NSDictionary *matchResult =             [[NSDictionary alloc] initWithObjectsAndKeys:            tournID, SDK_MATCH_POST_TOURNAMENT_KEY,            matchID,PSDK_MATCH_POST_MATCH_KEY,            [NSNumber numberWithInt:score],PSDK_MATCH_POST_SCORE_KEY,            nil]; 
 		PropellerSDK *gSDK = [PropellerSDK instance];		[gSDK launchWithMatchResult:matchResult delegate:self];	    [matchResult release];	}
 
 ### Moving Data
@@ -148,11 +148,11 @@ responding to the PropellerSDK
 1. When receiving an **sdkCompletedWithMatch** response
 
 	    NSString *tournID = [match objectForKey:PSDK_MATCH_RESULT_TOURNAMENT_KEY];	    NSString *matchID = [match objectForKey:PSDK_MATCH_RESULT_MATCH_KEY];	    NSDictionary *params = [match objectForKey:PSDK_MATCH_RESULT_PARAMS_KEY];
-		    GamePayload *payLoad = [GamePayload instance];	    payLoad.tournID = tournID;	    payLoad.matchID = matchID;	    payLoad.params = params;	    payLoad.activeFlag = true;	    payLoad.completeFlag= false;
+	    GamePayload *payLoad = [GamePayload instance];	    payLoad.tournID = tournID;	    payLoad.matchID = matchID;	    payLoad.params = params;	    payLoad.activeFlag = true;	    payLoad.completeFlag= false;
 
 1. When completing the gameplay and producing a score
 
-	    GamePayload *payLoad = [GamePayload instance];	    if (payLoad && payLoad.activeFlag) {	        payLoad.score = <score_to_post>;
+	    GamePayload *payLoad = [GamePayload instance];	    if (payLoad && payLoad.activeFlag)	    {	        payLoad.score = <score_to_post>;
 	        payLoad.completeFlag = true;	        [payLoad store];	        // now return to main screen	    }
 
 Integrating Challenge Counts
@@ -183,13 +183,15 @@ Below is some example code of how the notification can be ingested in
 your app/game. You do not need to ingest this, however, and can simply
 ask for a new value some time after the asynchronous gather call.
 
-    - (id)init {        if (self = [super init]) {
+    - (id)init
+    {        if (self = [super init]) 
+        {
             [[NSNotificationCenter defaultCenter] addObserver:self 
                 selector:@selector(receiveChallengeCount:)
                 name:@"PropellerSDKChallengeCountChanged"
-                object:nil];        }        return self;    }    - (void)onEnter {        [super onEnter];        if (![self sendResult])        {
-            [self updateChallengeCount:0];        }        [self schedule:@selector(updateChallengeCount:) interval:15];    }    - (void)dealloc {        [[NSNotificationCenter defaultCenter] removeObserver:self];        [super dealloc];    }    - (void)receiveChallengeCount:(NSNotification *)notification    {       if ([[notification name] isEqualToString:@"PropellerSDKChallengeCountChanged"]) {           NSDictionary *userInfo = notification.userInfo;           int count = [[userInfo objectForKey:@"count"] integerValue];
-       }    }    - (void)updateChallengeCount:(float) dt {       [[PropellerSDK instance] syncChallengeCounts];    }
+                object:nil];        }        return self;    }    - (void)onEnter
+    {        [super onEnter];        if (![self sendResult])        {
+            [self updateChallengeCount:0];        }        [self schedule:@selector(updateChallengeCount:) interval:15];    }    - (void)dealloc    {        [[NSNotificationCenter defaultCenter] removeObserver:self];        [super dealloc];    }    - (void)receiveChallengeCount:(NSNotification *)notification    {       if ([[notification name] isEqualToString:@"PropellerSDKChallengeCountChanged"])        {           NSDictionary *userInfo = notification.userInfo;           int count = [[userInfo objectForKey:@"count"] integerValue];       }    }    - (void)updateChallengeCount:(float)dt    {       [[PropellerSDK instance] syncChallengeCounts];    }
 
 Integrating Push Notifications
 ==============================
@@ -250,8 +252,7 @@ further information please contact Grantoo developer support.
 	**AppDelegate** method **application:didFinishLaunchingWithOptions:**.
 	
 	    - (BOOL)application:(UIApplication *)application
-	    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions	    {	        // Other initialization code…	 	        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:	            (UIRemoteNotificationTypeAlert |
-	             UIRemoteNotificationTypeBadge |	             UIRemoteNotificationTypeSound)];		        // Other initialization code…	    }	
+	    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions	    {	        // Other initialization code…	 	        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:	            (UIRemoteNotificationTypeAlert |	             UIRemoteNotificationTypeBadge |	             UIRemoteNotificationTypeSound)];		        // Other initialization code…	    }	
 	When your app receives a response from Apple, one of two callback
 	methods will be called in your **AppDelegate**:
 	
@@ -263,12 +264,8 @@ further information please contact Grantoo developer support.
 	**AppDelegate** to handle these two cases:
 
 	    - (void)application:(UIApplication *)app
-	    didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken	    {
-	        NSString *deviceToken = [[devToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];	        deviceToken = [deviceToken stringByReplacingOccurrencesOfString:@" " withString:@""];
-		        [PropellerSDK setNotificationToken:deviceToken];	    }		    - (void)application:(UIApplication *)app
-	    didFailToRegisterForRemoteNotificationsWithError:(NSError *)err	    {
-	        NSString *str = [NSString stringWithFormat:@"Error: %@", err];
-	        NSLog(@"%@",str);	        [PropellerSDK setNotificationToken:nil];	    }
+	    didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken	    {	        NSString *deviceToken = [[devToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];	        deviceToken = [deviceToken stringByReplacingOccurrencesOfString:@" " withString:@""];	        [PropellerSDK setNotificationToken:deviceToken];	    }		    - (void)application:(UIApplication *)app
+	    didFailToRegisterForRemoteNotificationsWithError:(NSError *)err	    {	        NSString *str = [NSString stringWithFormat:@"Error: %@", err];	        NSLog(@"%@",str);	        [PropellerSDK setNotificationToken:nil];	    }
 
 	In both callback methods be sure to call the setNotificationToken:
 	method on the PropellerSDK class to pass the device token to the sdk.
