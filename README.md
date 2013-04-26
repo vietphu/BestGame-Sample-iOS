@@ -66,7 +66,7 @@ Initialize the PropellerSDK with the following call (ideally at the
 start of your app in the **AppDelegate**’s **application:didFinishLaunchingWithOptions:**
 method):
  
-    [PropellerSDK useTestServers];    [PropellerSDK setRootViewController:navController_];    [PropellerSDK initialize:gameId gameSecret:gameSecret];    [[PropellerSDK instance] setOrientation:kPropelSDKLandscape]]
+    [PropellerSDK useSandbox];    [PropellerSDK setRootViewController:navController_];    [PropellerSDK initialize:gameId gameSecret:gameSecret];    [[PropellerSDK instance] setOrientation:kPropelSDKLandscape]]
  
 The first call to **useTestServers** will point you to the staging/test
 environment. This call will be removed when you go to production.  In
