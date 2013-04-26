@@ -45,8 +45,8 @@ typedef enum {
 // Used to initialize the singleton instance with some
 // kind of parameters.
 + (void)setRootViewController:(UIViewController *)rootViewController;
-+ (void)useTestServers;
-+ (void)useDebugServers:(NSString *)sdkURL grantooAPIURL:(NSString *)grantooAPIURL tournamentAPIURL:(NSString *)tournamentAPIURL challengeAPIURL:(NSString *)challengeAPIURL;
++ (void)useTestServers __deprecated;
++ (void)useSandbox;
 + (void)initialize:(NSString *)gameID gameSecret:(NSString *)gameSecret;
 + (void)setNotificationToken:(NSString *)token;
 // Handle incoming push notification.

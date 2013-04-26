@@ -232,7 +232,7 @@ NSString * const kPropellerURL = @"https://sandbox.grantoo.com/sdk";
 
 - (void)initGSDK:(UIViewController *)rootController
 {
-    [PropellerSDK useTestServers];
+    [PropellerSDK useSandbox];
     [PropellerSDK setRootViewController:rootController];
     [PropellerSDK initialize:kPropellerGameID gameSecret:kPropellerGameSecret];
     [[PropellerSDK instance] setOrientation:kPropelSDKLandscape];
