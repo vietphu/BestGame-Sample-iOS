@@ -62,11 +62,11 @@
         [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
         [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"menuBGM.mp3" loop:NO];
         
-        int currCount = [[PropellerSDK instance] getChallengeCounts];
-        [self displayChallengeCount:currCount];
-        
         [self updateChallengeCount:0];
     }
+
+    int currCount = [[PropellerSDK instance] getChallengeCounts];
+    [self displayChallengeCount:currCount];
     [self schedule:@selector(updateChallengeCount:) interval:15];
 }
 
